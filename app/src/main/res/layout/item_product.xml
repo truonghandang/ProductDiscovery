@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="productItem"
+            type="com.truonghd.productdiscovery.model.ProductModel" />
+
+        <variable
+            name="event"
+            type="com.truonghd.productdiscovery.viewmodel.ProductListingVM.OnClickItemCallBack" />
+
+        <import type="com.truonghd.productdiscovery.utils.CommonUtils" />
+
+        <import type="com.truonghd.productdiscovery.model.ProductImageModel" />
+
+        <import type="com.truonghd.productdiscovery.model.ProductPriceModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:background="@color/colorWhite"
+        android:onClick="@{ v -> event.onClickItemListing()}"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="12dp"
+            android:src="@drawable/img_product_default"
+            app:imageUrl="@{productItem.getImages().getImageUrl()}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/sfpro_text_regular"
+                android:lineHeight="19dp"
+                android:maxLines="2"
+                android:text="@{productItem.name}"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:lineHeight="20dp"
+                    android:maxLines="1"
+                    android:text="@{productItem.getPrice().getSellPrice()}"
+                    android:textColor="@color/colorTomato"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="1dp"
+                    android:lineHeight="20dp"
+                    android:maxLines="1"
+                    android:text="đ"
+                    android:textColor="@color/colorTomato"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal"
+                android:visibility="@{productItem.getPrice().isSaleOff() ? View.VISIBLE : View.GONE}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineHeight="16dp"
+                    android:maxLines="2"
+                    android:text="@{productItem.getPrice().getSupplierSalePrice()}"
+                    android:textColor="@color/colorCoolGrey"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="4dp"
+                    android:rotation="180"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_arrow_right" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_percent_sale"
+                    android:maxLines="2"
+                    android:paddingEnd="2dp"
+                    android:text="@{productItem.getPrice().getPercentSaleOff()}"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>
