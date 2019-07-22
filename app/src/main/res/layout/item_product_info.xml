@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.truonghd.productdiscovery.model.AttributeModel" />
+    </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -14,19 +21,19 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:lineHeight="19dp"
-            android:text="Thương hiệu"
+            android:text="@{viewModel.name}"
             android:textColor="@color/colorCoolGrey"
             android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
             android:layout_gravity="right"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
             android:layout_marginBottom="8dp"
             android:lineHeight="19dp"
-            android:text="Cooler Master"
+            android:text="@{viewModel.value}"
             android:textColor="@color/colorDarkGrey"
             android:textSize="14sp" />
 

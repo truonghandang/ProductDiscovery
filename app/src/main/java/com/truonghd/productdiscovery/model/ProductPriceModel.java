@@ -15,7 +15,7 @@ public class ProductPriceModel {
     private long sellPrice;
 
     public String getSupplierSalePrice() {
-        return String.format("<strike>%s</strike>", CommonUtils.formatNumber(String.valueOf(supplierSalePrice)));
+        return CommonUtils.formatNumber(String.valueOf(supplierSalePrice));
     }
 
     public void setSupplierSalePrice(long supplierSalePrice) {

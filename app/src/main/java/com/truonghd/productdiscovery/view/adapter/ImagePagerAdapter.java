@@ -4,12 +4,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.truonghd.productdiscovery.model.ProductImageModel;
 import com.truonghd.productdiscovery.view.fragment.ImagePagerFragment;
 
 import java.util.ArrayList;
 
 public class ImagePagerAdapter extends FragmentPagerAdapter {
-    private ArrayList<String> mListImage;
+    private ArrayList<ProductImageModel> mListImage = new ArrayList<>();
 
     public ImagePagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -25,7 +26,7 @@ public class ImagePagerAdapter extends FragmentPagerAdapter {
         return ImagePagerFragment.newInstance(mListImage.get(position));
     }
 
-    public void setListImage(ArrayList<String> mListImage) {
+    public void setListImage(ArrayList<ProductImageModel> mListImage) {
         this.mListImage = mListImage;
     }
 }

@@ -3,6 +3,7 @@ package com.truonghd.productdiscovery.viewmodel;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
 
 import com.truonghd.productdiscovery.connection.ApiClient;
 import com.truonghd.productdiscovery.model.ProductListingModel;
@@ -20,13 +21,11 @@ import retrofit2.Response;
  *
  * @version 1.0
  */
-public class ProductListingVM {
+public class ProductListingVM extends ViewModel {
     private ArrayList<ProductModel> mProductsList = new ArrayList<>();
-    private Context mContext;
     private IRequestApiCallBack mRequestApiCallBack;
 
-    public ProductListingVM(Context context) {
-        this.mContext = context;
+    public ProductListingVM() {
         getDataFromServer();
     }
 
@@ -54,7 +53,6 @@ public class ProductListingVM {
             }
         });
     }
-
 
 
     public interface IRequestApiCallBack {

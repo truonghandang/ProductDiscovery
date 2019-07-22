@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="model"
+            type="com.truonghd.productdiscovery.model.ProductImageModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -9,9 +16,9 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/img_slider"
             android:layout_width="327dp"
-            android:layout_height="327dp" />
+            android:layout_height="327dp"
+            app:imageUrl="@{model.getImageUrl()}" />
 
     </LinearLayout>
 </layout>

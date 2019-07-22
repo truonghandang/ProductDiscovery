@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class ProductModel {
+    private String displayName;
     private String name;
     @SerializedName("sku")
     private String productId;
@@ -18,8 +19,13 @@ public class ProductModel {
     private String productUrl;
     private ArrayList<ProductImageModel> images;
     private ProductPriceModel price;
+    private ProductStatusModel status;
+    private ArrayList<AttributeModel> attributeGroups;
 
     public String getName() {
+        if (!displayName.isEmpty()) {
+            return displayName;
+        }
         return name;
     }
 
@@ -43,7 +49,11 @@ public class ProductModel {
         this.productUrl = productUrl;
     }
 
-    public ProductImageModel getImages() {
+    public ArrayList<ProductImageModel> getImages() {
+        return images;
+    }
+
+    public ProductImageModel getImage() {
         if (images.size() == 0) {
             return null;
         }
@@ -60,5 +70,21 @@ public class ProductModel {
 
     public void setPrice(ProductPriceModel price) {
         this.price = price;
+    }
+
+    public ProductStatusModel getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProductStatusModel status) {
+        this.status = status;
+    }
+
+    public ArrayList<AttributeModel> getAttributeGroups() {
+        return attributeGroups;
+    }
+
+    public void setAttributeGroups(ArrayList<AttributeModel> attributeGroups) {
+        this.attributeGroups = attributeGroups;
     }
 }

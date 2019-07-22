@@ -2,14 +2,13 @@ package com.truonghd.productdiscovery.view.fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.Glide;
 import com.truonghd.productdiscovery.R;
 import com.truonghd.productdiscovery.databinding.FragmentImagePagerBinding;
+import com.truonghd.productdiscovery.model.ProductImageModel;
 
 /**
  * Created by Truong.HanDang on 2019-07-19
@@ -18,11 +17,12 @@ import com.truonghd.productdiscovery.databinding.FragmentImagePagerBinding;
  * @version 1.0
  */
 public class ImagePagerFragment extends BaseFragment<FragmentImagePagerBinding> {
-    private String mUrlImage;
+    private ProductImageModel mImageModel;
+    private static final String IMAGE_MODEL = "image_model";
 
-    public static ImagePagerFragment newInstance(String url) {
+    public static ImagePagerFragment newInstance(ProductImageModel imageModel) {
         Bundle args = new Bundle();
-        args.putSerializable("img_url", url);
+        args.putSerializable(IMAGE_MODEL, imageModel);
         ImagePagerFragment fragment = new ImagePagerFragment();
         fragment.setArguments(args);
         return fragment;
@@ -32,7 +32,7 @@ public class ImagePagerFragment extends BaseFragment<FragmentImagePagerBinding> 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mUrlImage = (String) getArguments().getSerializable("img_url");
+            mImageModel = (ProductImageModel) getArguments().getSerializable(IMAGE_MODEL);
         }
     }
 
@@ -44,10 +44,6 @@ public class ImagePagerFragment extends BaseFragment<FragmentImagePagerBinding> 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ImageView img = getViewBinding().imgSlider;
-
-        Glide.with(view.getContext())
-                .load(mUrlImage)
-                .into(img);
+        getViewBinding().setModel(mImageModel);
     }
 }

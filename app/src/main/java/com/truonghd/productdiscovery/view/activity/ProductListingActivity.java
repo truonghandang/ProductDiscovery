@@ -29,7 +29,7 @@ public class ProductListingActivity extends BaseActivity<ActivityProductListingB
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ProductListingVM(this);
+        mViewModel = new ProductListingVM();
         mViewModel.setRequestApiCallBack(this);
         initRecyclerView();
     }

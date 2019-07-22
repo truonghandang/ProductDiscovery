@@ -12,12 +12,6 @@
             name="event"
             type="com.truonghd.productdiscovery.viewmodel.ProductListingVM.OnClickItemCallBack" />
 
-        <import type="com.truonghd.productdiscovery.utils.CommonUtils" />
-
-        <import type="com.truonghd.productdiscovery.model.ProductImageModel" />
-
-        <import type="com.truonghd.productdiscovery.model.ProductPriceModel" />
-
         <import type="android.view.View" />
     </data>
 
@@ -35,7 +29,7 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="12dp"
             android:src="@drawable/img_product_default"
-            app:imageUrl="@{productItem.getImages().getImageUrl()}" />
+            app:imageUrl="@{productItem.getImage().getImageUrl()}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,9 +88,9 @@
                     android:layout_height="wrap_content"
                     android:lineHeight="16dp"
                     android:maxLines="2"
-                    android:text="@{productItem.getPrice().getSupplierSalePrice()}"
                     android:textColor="@color/colorCoolGrey"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:setTextStrike="@{productItem.getPrice().getSupplierSalePrice()}" />
 
                 <ImageView
                     android:layout_width="5dp"

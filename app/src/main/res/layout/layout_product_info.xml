@@ -18,6 +18,7 @@
                 android:orientation="horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/tab_description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -51,12 +52,13 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/tab_attr"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/tv_specifications"
+                        android:id="@+id/tv_attr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -78,13 +80,14 @@
                         android:layout_marginTop="11dp"
                         android:background="@drawable/bg_gradient_orange"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/tv_specifications"
-                        app:layout_constraintStart_toStartOf="@id/tv_specifications"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_specifications" />
+                        app:layout_constraintEnd_toEndOf="@+id/tv_attr"
+                        app:layout_constraintStart_toStartOf="@id/tv_attr"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_attr" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/tab_price_compare"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
@@ -129,7 +132,7 @@
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewpager_product_info"
                     android:layout_width="match_parent"
-                    android:layout_height="285dp"
+                    android:layout_height="200dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp" />
 

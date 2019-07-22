@@ -7,8 +7,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.truonghd.productdiscovery.R;
 import com.truonghd.productdiscovery.databinding.ActivityProductDetailsBinding;
+import com.truonghd.productdiscovery.model.ProductImageModel;
+import com.truonghd.productdiscovery.model.ProductModel;
 import com.truonghd.productdiscovery.view.adapter.ImagePagerAdapter;
 import com.truonghd.productdiscovery.view.adapter.ProductInfoPagerAdapter;
+import com.truonghd.productdiscovery.viewmodel.ProductDetailsVM;
 
 import java.util.ArrayList;
 
@@ -18,12 +21,16 @@ import java.util.ArrayList;
  *
  * @version 1.0
  */
-public class ProductDetailsActivity extends BaseActivity<ActivityProductDetailsBinding> implements ViewPager.OnPageChangeListener {
+public class ProductDetailsActivity extends BaseActivity<ActivityProductDetailsBinding>
+        implements ViewPager.OnPageChangeListener, ProductDetailsVM.IRequestDataDetaisCallBack {
     private ViewPager mImagePager;
     private ImagePagerAdapter mImageAdapter;
 
     private ViewPager mInfoPager;
     private ProductInfoPagerAdapter mInfoAdapter;
+    private String mProductId;
+    public static final String PRODUCT_ID = "product_sku";
+    private ProductDetailsVM mViewModel;
 
     @Override
     protected int getLayoutResourceId() {
@@ -33,29 +40,21 @@ public class ProductDetailsActivity extends BaseActivity<ActivityProductDetailsB
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mProductId = getIntent().getStringExtra(PRODUCT_ID);
+
+        mViewModel = new ProductDetailsVM("1200023");
+        mViewModel.setRequestApiCallBack(this);
+
         mImagePager = getViewBinding().layoutPreview.viewpagerSlider;
 
         mImageAdapter = new ImagePagerAdapter(getSupportFragmentManager());
 
-        ArrayList<String> listImage = new ArrayList<>();
-        listImage.add("https://img1.phongvu.vn/media/catalog/product/u/n/untitled-1_1_5.png");
-        listImage.add("https://img1.phongvu.vn/media/catalog/product/u/n/untitled-3_4_5.png");
-        listImage.add("https://img1.phongvu.vn/media/catalog/product/u/n/untitled-2_5_4.png");
-        listImage.add("http://catalog.teko.vn/storage/psu/19030233/ff1779b83c8c3225810b473251b16ea0_power%20asus%20rog%20thor%20850p_7.jpg");
-        listImage.add("https://img1.phongvu.vn/media/catalog/product/v/i/vigor_2920gvn.jpg");
-        mImageAdapter.setListImage(listImage);
         mImagePager.setAdapter(mImageAdapter);
         mImagePager.setCurrentItem(0);
         mImagePager.addOnPageChangeListener(this);
 
         getViewBinding().layoutPreview.tabDots.setupWithViewPager(mImagePager, true);
-
-
-        mInfoPager = getViewBinding().layoutInfo.viewpagerProductInfo;
-        mInfoAdapter = new ProductInfoPagerAdapter(getSupportFragmentManager());
-        mInfoPager.setAdapter(mInfoAdapter);
-        mInfoPager.setCurrentItem(0);
-        mInfoPager.addOnPageChangeListener(this);
     }
 
     @Override
@@ -70,6 +69,27 @@ public class ProductDetailsActivity extends BaseActivity<ActivityProductDetailsB
 
     @Override
     public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    public void onSuccess(ProductModel productModel) {
+        getViewBinding().layoutPreview.setProductModel(productModel);
+
+        mImageAdapter.setListImage(productModel.getImages());
+        mImageAdapter.notifyDataSetChanged();
+
+        mInfoPager = getViewBinding().layoutInfo.viewpagerProductInfo;
+        mInfoAdapter = new ProductInfoPagerAdapter(getSupportFragmentManager());
+        mInfoPager.setAdapter(mInfoAdapter);
+        mInfoPager.setCurrentItem(1);
+
+        mInfoAdapter.setListData(productModel.getAttributeGroups());
+        mInfoAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
 
     }
 }
